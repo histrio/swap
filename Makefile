@@ -1,7 +1,7 @@
 .PHONY: test run
 
 test:
-	pytest ./tests/
+	PYTHONPATH=./lib python tests/runner.py /tmp/google-cloud-sdk/
 
 run:
 	dev_appserver.py ./app.yaml --host=0.0.0.0 --admin_host=0.0.0.0 --log_level=debug

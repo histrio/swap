@@ -11,16 +11,19 @@
             - which
             - python2-pip
             - make
-      - pip: name=pip  state=latest
+      - name: Update PIP
+        pip: name=pip  state=latest
         become: yes
       - copy: src=requirements.txt dest=/tmp/requirements.txt
-      - pip:
+      - name: Install app requirements
+        pip:
             requirements: /tmp/requirements.txt
             extra_args: -t {{ swap_home }}/lib
             state: latest
         become: yes
       - copy: src=test-requirements.txt dest=/tmp/test-requirements.txt
-      - pip:
+      - name: Install test requirements
+        pip:
             requirements: /tmp/test-requirements.txt
             state: latest
         become: yes

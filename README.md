@@ -14,11 +14,6 @@ of flask responses
 `Return` exception can be raised if one wants to answer something to the
 request
 
-`get_memcached` function has been created to ease compatibility between
-standard and flexible environments
-
-When coding, you SHOULD NOT use any `google` namespace import.
-
 
 Testing
 -------
@@ -28,14 +23,14 @@ To test this, one should be using an sh compatible shell that support
 
 Finally, tests are run using `tox`.
 
-### Memcached
 
-Memcached can be booted locally by just running `memcached`, the default
-configuration for this project allows to seamlessly integrate with vanilla
-memcached
+Reproducable Developing Environment
+-----------------------------------
 
-### Datastore
+I had a lot of pain via setting up a developer environment for GAE. So, if it's not only me - use this:
 
-Datastore can be booted locally through `gcloud beta emulators datastore 
-start`. In this case however, one should initialize the environment, for
-example by running `$(gcloud beta emulators datastore env-init)`.
+vagrant up --provider=docker
+vagrant ssh
+cd /vagrant
+make test
+make run
