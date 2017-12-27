@@ -8,6 +8,7 @@ API
 - **[<code>GET</code> item](#api)**
 
 Get list of items available for swapping 
+  - `owner` (optional) get items for owner
 
 - **[<code>POST</code> item](#api)**
 
