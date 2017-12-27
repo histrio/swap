@@ -7,16 +7,16 @@ API
 
 - **[<code>GET</code> item](#api)**
 
-Get list of items available for swapping 
-  - `owner` (optional) get items for owner
+  Get list of items available for swapping 
+    - `owner` (optional) get items for owner
 
 - **[<code>POST</code> item](#api)**
 
-Publish an item you wish to swap 
+  Publish an item you wish to swap 
 
 - **[<code>POST</code> swapping](#api)**
 
-Swap one of your items to someone item. 
+  Swap one of your items to someone item. 
 
 
 Testing
