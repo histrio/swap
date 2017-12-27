@@ -5,14 +5,9 @@ Test assignment for backend developer
 API
 ---
 
-There is a simple API available. First of all, httplib has been wrapped in
-`http_request` function to ease of use.
-
-`gen_ok` and `gen_err` functions have been generated to ease the creation
-of flask responses
-
-`Return` exception can be raised if one wants to answer something to the
-request
+- **[<code>GET</code> item]()**
+- **[<code>POST</code> item]()**
+- **[<code>POST</code> swapping]()**
 
 
 Testing
@@ -21,10 +16,10 @@ Testing
 To test this, one should be using an sh compatible shell that support
 `$(some command)` and `export ENV_VAR=` syntax.
 
-Finally, tests are run using `tox`.
+Finally, tests are run using `make test`.
 
 
-Reproducable Developing Environment
+Reproducible Developing Environment
 -----------------------------------
 
 I had a lot of pain via setting up a developer environment for GAE. So, if it's not only me - use this:
