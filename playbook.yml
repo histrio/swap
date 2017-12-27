@@ -1,0 +1,42 @@
+---
+
+- hosts: all
+  vars:
+      swap_home: /vagrant
+  tasks:
+      - name: Install requirements
+        yum: name={{ item }} enablerepo=epel
+        become: yes
+        with_items:
+            - which
+            - python2-pip
+            - make
+      - pip: name=pip  state=latest
+        become: yes
+      - copy: src=requirements.txt dest=/tmp/requirements.txt
+      - pip:
+            requirements: /tmp/requirements.txt
+            extra_args: -t {{ swap_home }}/lib
+            state: latest
+        become: yes
+      - copy: src=test-requirements.txt dest=/tmp/test-requirements.txt
+      - pip:
+            requirements: /tmp/test-requirements.txt
+            state: latest
+        become: yes
+      - name: Get GCloud SDK
+        get_url:
+            url: https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-183.0.0-linux-x86_64.tar.gz
+            dest: /tmp/sdk.tar.gz
+            checksum: sha256:6e5c76999ff3f14621d26e3c76967dc4c43613344947ab42fcc764311642c898
+      - name: Unarchive an SDK
+        unarchive:
+          src: /tmp/sdk.tar.gz
+          dest: /tmp
+          remote_src: yes
+          creates: /tmp/google-cloud-sdk/install.sh
+      - name: Install SDK
+        command: /tmp/google-cloud-sdk/install.sh -q --command-completion true --path-update true
+      - name: Install Python SDK
+        command: gcloud components install app-engine-python
+

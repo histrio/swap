@@ -1,0 +1,5 @@
+werkzeug==0.12
+flask==0.12.2
+gcloud==0.18.3
+pymemcache==1.4.3
+six==1.11.0
