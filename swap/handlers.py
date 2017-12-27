@@ -1,4 +1,4 @@
-from flask import abort,  redirect, request
+from flask import abort, request
 
 from google.appengine.api import users
 
@@ -9,7 +9,8 @@ from swap.restutils import gen_error, gen_ok
 def login_required(function):
     def login_required_wrapper(*args, **kw):
         if not users.get_current_user():
-            return redirect(users.create_login_url(request.path))
+            return abort(401)
+            # return redirect(users.create_login_url(request.path))
         return function(*args, **kw)
     return login_required_wrapper
 
@@ -25,7 +26,7 @@ def item():
             owner_id=users.get_current_user().user_id()
         )
         result.put()
-        return result.key.id()
+        return gen_ok(result.key.id())
     else:  # GET
         owner = request.args.get(
             'owner', default=users.get_current_user().user_id(), type=str)
@@ -33,7 +34,22 @@ def item():
     return gen_ok(result)
 
 
-def swap(item, other):
+def swapping():
+    data = request.get_json(force=True)
+    if not data:
+        return abort(400)
+
+    try:
+        my_item = int(data['my'])
+        other_item = int(data['other'])
+    except ValueError:
+        return abort(400)
+
+    if not models.Item.exists(my_item) or \
+       not models.Item.exists(other_item) or \
+       not models.Item.owned_by(my_item, users.get_current_user().user_id()):
+        return abort(400)
+    models.Item.swap(my_item, other_item)
     return gen_ok()
 
 

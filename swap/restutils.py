@@ -18,7 +18,7 @@ def gen_ok(obj=None, code=200):
     result = {'API': 'Swap', 'version': __version__, 'status': "OK"}
     if obj is not None:
         result.update({'result': obj})
-    return _json.dumps(obj), code, {'Content-Type': 'application/json'}
+    return _json.dumps(result), code, {'Content-Type': 'application/json'}
 
 
 def return_error(e):

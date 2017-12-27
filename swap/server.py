@@ -36,7 +36,7 @@ def get_app():
 
     app.add_url_rule('/item/', view_func=handlers.item,
                      methods=['POST', 'GET'])
-    app.add_url_rule('/swapping/', view_func=handlers.swap,
+    app.add_url_rule('/swapping/', view_func=handlers.swapping,
                      methods=['POST'])
 
     _app = app
