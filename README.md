@@ -5,9 +5,17 @@ Test assignment for backend developer
 API
 ---
 
-- **[<code>GET</code> item]()**
-- **[<code>POST</code> item]()**
-- **[<code>POST</code> swapping]()**
+- **[<code>GET</code> item](#api)**
+
+Get list of items available for swapping 
+
+- **[<code>POST</code> item](#api)**
+
+Publish an item you wish to swap 
+
+- **[<code>POST</code> swapping](#api)**
+
+Swap one of your items to someone item. 
 
 
 Testing
