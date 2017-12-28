@@ -23,7 +23,8 @@ def item():
             return abort(400)
         result = models.Item(
             description=request.data,
-            owner_id=users.get_current_user().user_id()
+            owner_id=users.get_current_user().user_id(),
+            owner_email=users.get_current_user().email()
         )
         result.put()
         return gen_ok(result.key.id())
@@ -50,6 +51,7 @@ def swapping():
        not models.Item.owned_by(my_item, users.get_current_user().user_id()):
         return abort(400)
     models.Item.swap(my_item, other_item)
+
     return gen_ok()
 
 

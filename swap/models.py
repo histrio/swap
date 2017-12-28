@@ -1,10 +1,12 @@
 from google.appengine.ext import ndb
+from google.appengine.api import mail
 
 
 class Item(ndb.Model):
     """Models an Item to swap entry with desciption only."""
     description = ndb.StringProperty()
     owner_id = ndb.StringProperty()
+    owner_email = ndb.StringProperty()
 
     @classmethod
     def get_by_owner(cls, owner_id):
@@ -33,3 +35,14 @@ class Item(ndb.Model):
         other = ndb.Key(cls, other_item_id).get()
         my.owner_id, other.owner_id = other.owner_id, my.owner_id
         ndb.put_multi([my, other])
+        cls.notify_owner(my)
+        cls.notify_owner(other)
+
+    @staticmethod
+    def notify_owner(item):
+        mail.send_mail(
+            sender=item.owner_email,
+            to=item.owner_email,
+            subject="Your item `` has been swapped to ``",
+            body=""
+        )

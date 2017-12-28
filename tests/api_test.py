@@ -16,6 +16,8 @@ class TestBase(unittest.TestCase):
 
         self.testbed.init_user_stub()
         self.testbed.init_memcache_stub()
+        self.testbed.init_mail_stub()
+        self.mail_stub = self.testbed.get_stub(testbed.MAIL_SERVICE_NAME)
 
         self.app = server.get_app().test_client()
         ndb.get_context().clear_cache()
